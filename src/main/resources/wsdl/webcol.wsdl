@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://extranet.grupotoniato.com.br/soap/GrupoToniato"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://extranet.grupotoniato.com.br/soap/GrupoToniato">
+	<types>
+		<xsd:schema targetNamespace="http://extranet.grupotoniato.com.br/soap/GrupoToniato">
+			<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+			<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+			<xsd:complexType name="StatusResultReport">
+				<xsd:all>
+					<xsd:element name="nota" type="xsd:int" />
+					<xsd:element name="msg" type="xsd:string" />
+				</xsd:all>
+			</xsd:complexType>
+			<xsd:complexType name="StatusResultReportArray">
+				<xsd:complexContent>
+					<xsd:restriction base="SOAP-ENC:Array">
+						<xsd:attribute ref="SOAP-ENC:arrayType"
+							wsdl:arrayType="tns:StatusResultReport[]" />
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="StatusResult">
+				<xsd:all>
+					<xsd:element name="AdicionaStatusResult" type="xsd:int" />
+					<xsd:element name="AdicionaStatusError" type="xsd:string" />
+					<xsd:element name="AdicionaStatusReport" type="tns:StatusResultReportArray" />
+				</xsd:all>
+			</xsd:complexType>
+		</xsd:schema>
+	</types>
+	<message name="AdicionaStatusRequest">
+		<part name="xml" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+	</message>
+	<message name="AdicionaStatusResponse">
+		<part name="return" type="tns:StatusResult" />
+	</message>
+	<message name="AdicionaStatusCDRequest">
+		<part name="xml" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+	</message>
+	<message name="AdicionaStatusCDResponse">
+		<part name="return" type="tns:StatusResult" />
+	</message>
+	<portType name="GrupoToniatoPortType">
+		<operation name="AdicionaStatus">
+			<documentation>Registrar Status para Notas</documentation>
+			<input message="tns:AdicionaStatusRequest" />
+			<output message="tns:AdicionaStatusResponse" />
+		</operation>
+		<operation name="AdicionaStatusCD">
+			<documentation>Registrar Status CD para estoque</documentation>
+			<input message="tns:AdicionaStatusCDRequest" />
+			<output message="tns:AdicionaStatusCDResponse" />
+		</operation>
+	</portType>
+	<binding name="GrupoToniatoBinding" type="tns:GrupoToniatoPortType">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="AdicionaStatus">
+			<soap:operation
+				soapAction="http://extranet.grupotoniato.com.br/desenvolvimento/public/server.php/AdicionaStatus"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://extranet.grupotoniato.com.br/server.php"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://extranet.grupotoniato.com.br/server.php"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="AdicionaStatusCD">
+			<soap:operation
+				soapAction="http://extranet.grupotoniato.com.br/desenvolvimento/public/server.php/AdicionaStatusCD"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="http://extranet.grupotoniato.com.br/server.php"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="http://extranet.grupotoniato.com.br/server.php"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+	<service name="GrupoToniato">
+		<port name="GrupoToniatoPort" binding="tns:GrupoToniatoBinding">
+			<soap:address
+				location="https://extranet.grupotoniato.com.br:443/desenvolvimento/public/server.php" />
+		</port>
+	</service>
+</definitions>
