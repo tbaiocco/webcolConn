@@ -14,7 +14,7 @@ public class XMLUtil {
 		return xml;
 	}
 	
-	public static String motaInteriorXML(String dthratualizacao, String codigoocorrencia, String longitude,
+	public static String montaInteriorXML(String dthratualizacao, String codigoocorrencia, String longitude,
 			String latitude, String localizacao, String dataentrega, String dataprevisaoentrega, String numerofiscal,
 			String cnpjremetente, String cnpjtransportador) {
 		
