@@ -1,8 +1,10 @@
 package com.nuovonet.ws.client;
 
+import java.util.List;
+
 public class XMLUtil {
 	
-	public static String retornaXML(String... interno) {
+	public static String retornaXML(List<String> interno) {
 		
 		String xml = "";
 		xml += "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>";
@@ -19,17 +21,16 @@ public class XMLUtil {
 			String cnpjremetente, String cnpjtransportador) {
 		
 		String xml = "<notafiscal ";
-		xml += "dthratualizacao=\"" + dthratualizacao + "\" ";
-		xml += "codigoocorrencia=\"" + codigoocorrencia + "\" ";
+		xml += "dthratualizacao=\"" + dthratualizacao.trim() + "\" ";
+		xml += "codigoocorrencia=\"" + codigoocorrencia.trim() + "\" ";
 		xml += "longitude=\"" + longitude + "\" ";
 		xml += "latitude=\"" + latitude + "\" ";
 		xml += "localizacao=\"" + localizacao + "\" ";
-		xml += "dataentrega=\"" + dataentrega + "\" ";
-		xml += "dataprevisaoentrega=\"" + dataprevisaoentrega + "\" ";
-		xml += "numerofiscal=\"" + numerofiscal + "\" ";
-		xml += "cnpjremetente=\"" + cnpjremetente + "\" ";
-		xml += "cnpjtransportador=\"" + cnpjtransportador + "\"/>";
-		xml += "/>";
+		xml += "dataentrega=\"" + dataentrega.trim() + "\" ";
+		xml += "dataprevisaoentrega=\"" + dataprevisaoentrega.trim() + "\" ";
+		xml += "numerofiscal=\"" + numerofiscal.trim() + "\" ";
+		xml += "cnpjremetente=\"" + cnpjremetente.trim() + "\" ";
+		xml += "cnpjtransportador=\"" + cnpjtransportador.trim() + "\"/>";
 		return xml;
 	}
 	
